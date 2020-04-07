@@ -1,4 +1,15 @@
-# PaylocityCodingChallenge
+# Employee Benefits Calculator
+
+MEAN Stack Web Application to calculate employee cost benefits and store calculations for employees in MongoDB.
+
+M: MongoDB
+
+E: Express.js
+
+A: Angular 9 
+
+N: Node.js
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.0.4.
 
