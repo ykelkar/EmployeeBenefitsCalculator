@@ -13,6 +13,7 @@ A: Angular 9
 N: Node.js
 
 ## Usage
+* Run `npm install`
 * Run `npm install -g @angular/cli`
 * Run `ng serve` and navigate to `localhost:4200`
 * Run `nodemon server.js`
