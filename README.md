@@ -1,5 +1,7 @@
 # Employee Benefits Calculator
 
+![](employee-benefits.png)
+
 MEAN Stack Web Application to calculate employee cost benefits and store calculations for employees in MongoDB.
 
 M: MongoDB
@@ -10,6 +12,7 @@ A: Angular 9
 
 N: Node.js
 
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Usage
+* Run `npm install -g @angular/cli`
+* Run `ng serve` and navigate to `localhost:4200`
+* Run `nodemon server.js`
