@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "paylocity-coding-challenge": {
+    "employee-benefits-calc": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/paylocity-coding-challenge",
+            "outputPath": "dist/employee-benefits-calc",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "paylocity-coding-challenge:build"
+            "browserTarget": "employee-benefits-calc:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "paylocity-coding-challenge:build:production"
+              "browserTarget": "employee-benefits-calc:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "paylocity-coding-challenge:build"
+            "browserTarget": "employee-benefits-calc:build"
           }
         },
         "test": {
@@ -110,16 +110,19 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "paylocity-coding-challenge:serve"
+            "devServerTarget": "employee-benefits-calc:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "paylocity-coding-challenge:serve:production"
+              "devServerTarget": "employee-benefits-calc:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "paylocity-coding-challenge"
+  "defaultProject": "employee-benefits-calc",
+  "cli": {
+    "analytics": "60afbcda-779b-41af-ae22-89eb3c210621"
+  }
 }

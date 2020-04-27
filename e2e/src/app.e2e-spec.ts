@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('paylocity-coding-challenge app is running!');
+    expect(page.getTitleText()).toEqual('employee-benefits-calc app is running!');
   });
 
   afterEach(async () => {

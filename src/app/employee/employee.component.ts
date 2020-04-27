@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { EmployeeService } from '../employee-service.service';
 import { Employee } from '../employee';
 import { MatTable } from '@angular/material/table';
@@ -36,24 +36,24 @@ export class EmployeeComponent implements OnInit {
   columnsToDisplay: string[] = this.displayedColumns.slice();
 
   getErrorMessage(name) {
-    if (name.hasError('required')) {
-      return 'You must enter a value';
-    } 
+    if (name.hasError('required')) return 'You must enter a value';
     return name.hasError('pattern') ? 'Enter a valid name' : '';
   }
 
   deleteEmployee(id:any) {
     let employees = this.employees;
+    let i = 0;
     this.employeeService.deleteEmployee(id).subscribe(data => {
-      if (data.n == 1) {
-        for (var i = 0; i < employees.length; i++) {
-          if (employees[i]._id == id) {
-            this.totalCosts.paycheck -= employees[i].costPaycheck;
-            this.totalCosts.year -= employees[i].costYear;
+      if (data.n === 1) {
+        for (let employee of employees) {
+          if (employee._id === id) {
+            this.totalCosts.paycheck -= employee.costPaycheck;
+            this.totalCosts.year -= employee.costYear;
             employees.splice(i,1);
             this.table.renderRows();
           }
-        } 
+          i++;
+        }
       }
     });
   }
@@ -64,27 +64,24 @@ export class EmployeeComponent implements OnInit {
   }
   
   addEmployee() {
-    let name = this.employeeName.value;
-    let dependents = [];
     let totalCostsPaycheck = this.calculateCosts().paycheck;
     let totalCostsYear = this.calculateCosts().year;
-    for (let dependent of this.dependents) { 
-      dependents.push(dependent.value);
-    }
+
     const newEmployee = { 
-      name: name,
-      dependents: dependents,
+      name: this.employeeName.value,
+      dependents: this.dependents.map(dependent => dependent.value),
       costPaycheck: totalCostsPaycheck,
       costYear: totalCostsYear
     }
+
     this.employeeService.addEmployee(newEmployee).subscribe(employee => {
       this.employees.push(employee);
       this.table.renderRows();
     });
+
     this.totalCosts.paycheck += totalCostsPaycheck;
     this.totalCosts.year += totalCostsYear;
     this.clearEntries();
-    this.table.renderRows();
   }
 
   addDependent() {
@@ -106,16 +103,27 @@ export class EmployeeComponent implements OnInit {
       year: 0,
       paycheck: 0
     }
-    if (employee != "" && employee.charAt(0) == 'A') {
+    
+    this.calculateEmployeeCost(employee, cost);
+    this.calculateDependentsCosts(dependents, cost);
+    
+    return cost;
+  }
+
+  calculateEmployeeCost(employee, cost) {
+    if (employee != "" && employee.charAt(0) === 'A') {
       cost.year += this.applyDiscount(costs.employee).year;
       cost.paycheck += this.applyDiscount(costs.employee).paycheck;
-    } else {
+    } else if (employee != ""){
       cost.year += costs.employee.PerYear;
       cost.paycheck += costs.employee.PerPaycheck;
     }
+  }
+
+  calculateDependentsCosts(dependents, cost) {
     if (dependents.length != 0) {
       for (let dependent of dependents) {
-        if (dependent.value.charAt(0) == 'A') {
+        if (dependent.value.charAt(0) === 'A') {
           cost.year += this.applyDiscount(costs.dependent).year;
           cost.paycheck += this.applyDiscount(costs.dependent).paycheck;
         } else {
@@ -124,7 +132,6 @@ export class EmployeeComponent implements OnInit {
         }
       }
     }
-    return cost;
   }
 
   ngOnInit() {
@@ -136,5 +143,4 @@ export class EmployeeComponent implements OnInit {
       }
     });
   }
-  
 }
