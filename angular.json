@@ -117,6 +117,14 @@
               "devServerTarget": "employee-benefits-calc:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@netlify-builder/deploy:deploy",
+          "options": {
+            "outputPath": "dist/employee-benefits-calc",
+            "netlifyToken": "",
+            "siteId": "cc849850-c80c-4ad5-a687-ea22be0f12c0"
+          }
         }
       }
     }
