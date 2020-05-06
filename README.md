@@ -1,6 +1,6 @@
 # Employee Benefits Calculator
 
-![](employee-benefits.png)
+![](employee.png)
 
 MEAN Stack Web Application to calculate employee cost benefits and store calculations for employees in MongoDB.
 
